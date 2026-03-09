@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #232323; -webkit-text-stroke: #232323; background-color: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #232323; -webkit-text-stroke: #232323; background-color: #ffffff; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;title&gt;Mission Possible 2026 — Build Guide&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1">&lt;link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;style&gt;</span></p>
+<p class="p1"><span class="s1">:root {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--bg: #faf7f2;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--surface: #fff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--border: #e8e2d9;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--accent: #d4421e;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--accent2: #1a6b4f;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--dark: #1a1a1a;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--text: #3a3632;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--dim: #9a928a;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--yellow: #e8a820;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--green: #2a8a5f;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--blue: #2a6a9a;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--checkedBg: #f0ede8;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">* { margin:0; padding:0; box-sizing:border-box; }</span></p>
+<p class="p1"><span class="s1">body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--bg);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--text);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: 'JetBrains Mono', monospace;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: 1.6;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding-bottom: 60px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.masthead {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding: 40px 40px 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border-bottom: 3px solid var(--dark);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-bottom: 32px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.masthead h1 {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: 'Syne', sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 800;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 36px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: -1px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--dark);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: 1.1;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.masthead .tagline {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-top: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--dim);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 1px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.stats-bar {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>gap: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding: 0 40px 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>flex-wrap: wrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.stat {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>flex-direction: column;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.stat-val {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: 'Syne', sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--accent);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: 1;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.stat-lbl {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--dim);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: 1px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-top: 2px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.progress-summary {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin: 0 40px 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding: 16px 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--surface);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border: 1px solid var(--border);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>gap: 16px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.progress-bar-outer {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>flex: 1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--border);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: relative;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.progress-bar-inner {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--accent2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>transition: width .3s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 0%;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.progress-text {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--accent2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>min-width: 90px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-align: right;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.phase {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin: 0 40px 32px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.phase-header {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>align-items: baseline;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>gap: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-bottom: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding-bottom: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border-bottom: 2px solid var(--dark);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.phase-num {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: 'Syne', sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 800;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--dark);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--bg);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>justify-content: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>flex-shrink: 0;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.phase-title {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-family: 'Syne', sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--dark);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.phase-time {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-left: auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 11px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--accent);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-weight: 500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.step {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>gap: 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding: 12px 16px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--surface);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border: 1px solid var(--border);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-bottom: 4px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>transition: all .15s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>position: relative;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.step:hover { border-color: var(--accent); }</span></p>
+<p class="p1"><span class="s1">.step.checked {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--checkedBg);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>opacity: .7;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.step.checked .step-text { text-decoration: line-through; color: var(--dim); }</span></p>
+<p class="p1"><span class="s1">.checkbox {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>width: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>height: 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border: 2px solid var(--border);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>flex-shrink: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-top: 2px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>align-items: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>justify-content: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>transition: all .15s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: transparent;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.step.checked .checkbox {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border-color: var(--accent2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: var(--accent2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: #fff;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.step-body { flex: 1; }</span></p>
+<p class="p1"><span class="s1">.step-text {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>transition: all .15s;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.step-meta {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>display: flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>gap: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin-top: 4px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--dim);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.step-meta .time-est { color: var(--blue); }</span></p>
+<p class="p1"><span class="s1">.step-meta .materials { color: var(--accent); }</span></p>
+<p class="p1"><span class="s1">.test-checkpoint {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin: 8px 0 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding: 10px 16px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: #fef9e7;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border-left: 4px solid var(--yellow);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 11px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.test-checkpoint strong {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--yellow);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: .5px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.tip-box {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin: 8px 0 4px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding: 10px 16px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>background: #edf7f1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border-left: 4px solid var(--green);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 11px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.tip-box strong {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--green);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>text-transform: uppercase;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>letter-spacing: .5px;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.footer-note {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>margin: 40px 40px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>padding: 20px 0 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>border-top: 2px solid var(--dark);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>font-size: 11px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>color: var(--dim);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>line-height: 1.8;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.footer-note strong { color: var(--dark); }</span></p>
+<p class="p1"><span class="s1">@media print {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>body { background: #fff; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.step:hover { border-color: var(--border); }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">@keyframes slideIn {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>from { opacity:0; transform:translateX(-12px); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>to { opacity:1; transform:translateX(0); }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">.phase { animation: slideIn .4s ease-out both; }</span></p>
+<p class="p1"><span class="s1">.phase:nth-child(2) { animation-delay: .05s; }</span></p>
+<p class="p1"><span class="s1">.phase:nth-child(3) { animation-delay: .1s; }</span></p>
+<p class="p1"><span class="s1">.phase:nth-child(4) { animation-delay: .15s; }</span></p>
+<p class="p1"><span class="s1">.phase:nth-child(5) { animation-delay: .2s; }</span></p>
+<p class="p1"><span class="s1">.phase:nth-child(6) { animation-delay: .25s; }</span></p>
+<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="masthead"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h1&gt;Build Guide&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="tagline"&gt;Mission Possible 2026 &amp;mdash; 6-Action Rube Goldberg Sorter &amp;mdash; Step-by-step construction checklist&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="stats-bar"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="stat"&gt;&lt;span class="stat-val"&gt;~4h&lt;/span&gt;&lt;span class="stat-lbl"&gt;Total Build Time&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="stat"&gt;&lt;span class="stat-val"&gt;6&lt;/span&gt;&lt;span class="stat-lbl"&gt;Phases&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="stat"&gt;&lt;span class="stat-val" id="totalSteps"&gt;0&lt;/span&gt;&lt;span class="stat-lbl"&gt;Steps&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="stat"&gt;&lt;span class="stat-val"&gt;4&lt;/span&gt;&lt;span class="stat-lbl"&gt;Required Machines&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="progress-summary"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="progress-bar-outer"&gt;&lt;div class="progress-bar-inner" id="progBar"&gt;&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="progress-text" id="progText"&gt;0 / 0 done&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div id="phases"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="footer-note"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;strong&gt;Before competition day:&lt;/strong&gt; Run the full device 20+ times and record completion times. Set your target time to the average. Bring backup string, extra magnets, and spare popsicle sticks. Arrive early to re-calibrate ramp angles if the competition surface is different from your build surface.</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p1"><span class="s1">const data = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>title: 'Base &amp; Framework',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>time: '~30 min',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>steps: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Lay out the 85×85 cm plywood base board on a flat work surface. Mark the center and edges.', time: '3 min', mat: 'Plywood base' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Attach the 85×85 cm backboard vertically along the back edge using wood screws or heavy-duty brackets. Ensure it is perpendicular.', time: '8 min', mat: 'Backboard, screws, brackets' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Mark component positions on the base and backboard using the layout diagram. Draw outlines for: Cup cradle (5–20 cm, h=65–75 cm), Hopper (5–25 cm, h=35–65 cm), Machine zone (30–80 cm, h=25–65 cm), Sorting zone (10–75 cm, h=0–35 cm).', time: '10 min', mat: 'Pencil, ruler, layout diagram' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Build vertical support pillars from scrap wood at key heights: 70 cm (cup), 55 cm (wheel &amp; axle), 40 cm (inclined plane), 30 cm (screw). Glue/screw to backboard.', time: '10 min', mat: 'Scrap wood, screws, hot glue' }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>test: null,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tip: 'Measure twice, cut once. Accurate positioning now saves hours of troubleshooting later.'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>title: 'Start Mechanism (Cup + Hopper)',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>time: '~30 min',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>steps: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Build the cup cradle from popsicle sticks at h=70 cm on the left support pillar. Create a pivot point at the back so the cup can tip forward.', time: '8 min', mat: 'Popsicle sticks, hot glue, 16 oz cup' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Install a small latch/pin mechanism that holds the cup level. Attach a trigger string that, when pulled, releases the latch.', time: '8 min', mat: 'String, small nail/pin' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Build the hopper from cardboard: a funnel shape 20×20 cm opening at top, narrowing to ~10 cm at the bottom gate. Mount below the cup cradle (h=35–65 cm).', time: '10 min', mat: 'Cardboard, hot glue, tape' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Install the hopper gate: a pin/latch at the bottom of the hopper that holds items inside. The gate pin will be pulled by the screw mechanism (Action 4) later.', time: '5 min', mat: 'Pin, string attachment point' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Attach String A from the cup base to the wedge location (30 cm right, same height). Leave slack — it should go taut only when the cup tips fully.', time: '4 min', mat: 'String/twine (~40 cm)' }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>test: 'Load 5 test items into the cup. Pull the trigger string. Verify: (1) cup tips cleanly, (2) items fall into hopper, (3) String A goes taut and has enough pull force to move a small block. Run 10 times.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tip: 'The cup must tip far enough to dump ALL items, but not so far that it jams. Aim for ~70° rotation.'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>title: 'Simple Machines Chain (Actions 1–4)',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>time: '~90 min',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>steps: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'ACTION 1 — WEDGE: Build a 20 cm popsicle-stick channel/track at h=60–65 cm starting at x=30 cm. Angle it ~15° downward toward the wheel &amp; axle area.', time: '10 min', mat: 'Popsicle sticks, hot glue' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Carve/cut a small triangular wood wedge block. Place it at the start of the track to block the golf ball. Tie String A to the wedge so pulling it slides the wedge out.', time: '8 min', mat: 'Wood block, string' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Test Action 1 independently: place golf ball behind wedge, pull string, ball should roll full length of track and drop into a target area.', time: '5 min', mat: 'Golf ball' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'ACTION 2 — WHEEL &amp; AXLE: Mount a wheel (R=6 cm disc) and axle (R=3 cm dowel/spool) on a horizontal axle at h=55 cm, x=55–70 cm. The axle must spin freely.', time: '15 min', mat: 'Wood disc/cardboard wheel, dowel, support brackets' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Wrap a string around the wheel, attach a small bucket at the end (where the golf ball will land). Wrap another string around the axle in the opposite direction, attach the 50 g weight.', time: '8 min', mat: 'String, small bucket/cup, 50 g weight' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Test Action 2 independently: drop golf ball into bucket. Verify the 50 g weight rises at least 15 cm. The weight must rise enough to hit a trigger lever.', time: '5 min', mat: 'Golf ball' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'ACTION 3 — INCLINED PLANE: Build a 30 cm ramp at x=55–80 cm with 10 cm vertical rise (bottom at h=30 cm, top at h=40 cm). Use stiff cardboard or wood with low-friction surface.', time: '10 min', mat: '30 cm ramp piece, supports' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Install a pulley at the top of the ramp. Run string from the 100 g object (on the ramp) over the pulley to a 50 g counterweight. Build a trigger lever that the rising 50 g weight from Action 2 hits to release the counterweight.', time: '12 min', mat: 'Pulley/nail, string, 100 g object, 50 g counterweight' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Test Action 3 independently: release the counterweight and verify the 100 g object reaches the top of the ramp and tips off the end.', time: '5 min', mat: '' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'ACTION 4 — SCREW: Mount a long bolt through a fixed nut bracket at h=30 cm, x=50–65 cm. The bolt head should have a lever arm where the 100 g object can land.', time: '10 min', mat: 'Long bolt, nut, bracket, lever arm' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Attach a string from the bolt shaft to the hopper gate pin (~25 cm of string). When the bolt rotates, the string should wrap around the shaft and pull the pin out.', time: '8 min', mat: 'String (~30 cm)' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Test Action 4 independently: drop a weight onto the lever arm. Verify the bolt turns enough to pull the gate string tight and extract the pin.', time: '5 min', mat: '100 g test weight' }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>test: 'Connect Actions 1–4 in sequence. Pull String A (simulating cup trigger). Verify the complete chain: wedge pulls → ball rolls → bucket drops → weight rises → counterweight releases → object climbs ramp → falls onto screw → gate pin pulls out. Run the full chain 10 times. Success rate should be &gt; 80% before proceeding.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tip: 'If any action fails intermittently, add more margin: steeper track, heavier bucket, bigger counterweight. Reliability &gt; elegance.'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>title: 'Sorting Ramp + Magnets (Action 5)',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>time: '~40 min',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>steps: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Build the sorting ramp: 50 cm long, 20 cm wide, starting at h=35 cm (below the hopper gate) and ending at h=10 cm. Use cardboard or thin plywood with raised side walls (~3 cm high).', time: '15 min', mat: 'Cardboard/plywood, side walls' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Mount 3–4 neodymium disc magnets along the right wall of the ramp at the midpoint (approximately 25 cm from the top). Space them 3–4 cm apart vertically.', time: '8 min', mat: '3–4 neodymium magnets, hot glue/tape' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Position Container 2 (for clips) directly below the magnet section. Build a small chute/guide if needed to direct falling clips into the container.', time: '5 min', mat: 'Container/box, optional chute' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Adjust the ramp angle to ~25°. Test with individual items: paper clips should stick to magnets and drop into C2. Marbles and tees should slide past without stopping.', time: '10 min', mat: 'Test items' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Fine-tune magnet placement: if clips aren\'t captured, move magnets closer to the ramp surface or add more. If marbles are slowing down near magnets, ensure they are non-magnetic steel balls (not chrome steel).', time: '5 min', mat: '' }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>test: 'Release 10 paper clips, 5 marbles, and 5 tees from the top of the sorting ramp one at a time. Verify: (1) all clips stick to magnets and fall into C2, (2) all marbles and tees slide past magnets. Then release all 20 at once and verify separation. Success rate must be 100% for clips, 95%+ for pass-through items.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tip: 'The ramp angle is the most critical variable. Too steep = clips fly past magnets. Too shallow = items get stuck. Start at 25° and adjust in 2° increments.'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>title: 'Bar Grid Separator (Action 6)',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>time: '~30 min',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>steps: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Cut 15 wooden dowels (3 mm diameter) to 20 cm length each.', time: '5 min', mat: '3 mm dowels, saw/snips' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Build a frame from popsicle sticks or thin wood strips (two parallel rails, 20 cm apart). Drill or cut 15 evenly spaced notches at 10 mm center-to-center spacing.', time: '12 min', mat: 'Frame material, drill/knife' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Glue all 15 dowels into the frame notches. Ensure they are parallel and the gaps are consistent at 10 mm (7 mm clear gap between 3 mm dowels).', time: '8 min', mat: 'Hot glue' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Mount the bar grid at the bottom of the sorting ramp (x=55–75 cm, h=5–10 cm) with a slight tilt so marbles roll across into Container 1. Position Container 3 directly below for tees.', time: '5 min', mat: 'Mounting supports, C1 and C3 containers' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Test with actual competition items: drop marbles one at a time (all should roll across), then tees (all should fall through). Adjust spacing if any item behaves unexpectedly.', time: '5 min', mat: 'Test marbles and tees' }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>test: 'Release 10 marbles and 10 tees from the sorting ramp (after the magnet section). Verify: (1) all marbles roll across the bar grid into Container 1, (2) all golf tees fall through into Container 3. Test 5 times. Also test with items arriving at speed (not just dropped gently).',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tip: 'Measure the gaps with calipers if possible. Even 1 mm error can cause a marble to jam or a tee to not fall through. The actual items you\'ll use in competition may differ from practice items — bring extras to calibrate on-site.'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>title: 'Integration &amp; Rehearsal',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>time: '~60 min',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>steps: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Connect all subsystems: Cup → Hopper (items) + String A → Wedge → Wheel &amp; Axle → Inclined Plane → Screw → Gate opens → Sorting ramp → Magnetic sort → Bar grid → 3 containers.', time: '15 min', mat: '' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Load all 30 items (10 marbles + 10 clips + 10 tees) into the cup. Run the full device. Note any failures or jams.', time: '5 min', mat: 'All 30 items' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Fix any issues found in the first full run. Common problems: string too tight/loose, ramp angle off, items jamming in hopper, magnets not strong enough, bar grid spacing inconsistent.', time: '15 min', mat: 'Adjustment tools' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Run the device 10 more times. Record: (a) completion time for each run, (b) any failures, (c) final item counts in each container. Target: 100% sort accuracy, &lt; 5% failure rate on chain.', time: '15 min', mat: 'Stopwatch, notebook' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Calculate your average run time. This is your competition target time. Practice announcing the target time before each run.', time: '5 min', mat: '' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: 'Pack backup supplies: extra string, spare magnets, extra popsicle sticks, hot glue gun + sticks, duct tape, tweezers for adjustments. Label all containers.', time: '5 min', mat: 'Backup supplies' }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>test: 'FINAL VALIDATION: Run the complete device 5 times in a row without touching it between runs (just reload items). All 5 runs must: (1) complete the full 6-action chain, (2) correctly sort all 30 items, (3) finish within ±10% of your target time. If any run fails, diagnose and fix before competition.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tip: 'The competition surface may be different from your build surface. Bring shims and angle adjusters. Also: practice reloading items quickly — you may need to reset between attempts.'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1">];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const phasesEl = document.getElementById('phases');</span></p>
+<p class="p1"><span class="s1">let totalSteps = 0;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">data.forEach((phase, pi) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>totalSteps += phase.steps.length;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>let html = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="phase"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="phase-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="phase-num"&gt;${pi + 1}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="phase-title"&gt;${phase.title}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="phase-time"&gt;${phase.time}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>phase.steps.forEach((step, si) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const id = `s${pi}_${si}`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>html += `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="step" data-id="${id}" onclick="toggle('${id}')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="checkbox"&gt;&amp;#10003;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="step-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="step-text"&gt;${step.text}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="step-meta"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;span class="time-est"&gt;${step.time}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>${step.mat ? `&lt;span class="materials"&gt;${step.mat}&lt;/span&gt;` : ''}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (phase.test) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>html += `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="test-checkpoint"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Test Checkpoint:&lt;/strong&gt; ${phase.test}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (phase.tip) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>html += `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="tip-box"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;strong&gt;Tip:&lt;/strong&gt; ${phase.tip}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>html += '&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>phasesEl.innerHTML += html;</span></p>
+<p class="p1"><span class="s1">});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">document.getElementById('totalSteps').textContent = totalSteps;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const checked = new Set();</span></p>
+<p class="p1"><span class="s1">try {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const saved = JSON.parse(localStorage.getItem('mp2026_checked') || '[]');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>saved.forEach(id =&gt; checked.add(id));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>checked.forEach(id =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const el = document.querySelector(`[data-id="${id}"]`);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (el) el.classList.add('checked');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p1"><span class="s1">} catch(e) {}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function toggle(id) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const el = document.querySelector(`[data-id="${id}"]`);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (checked.has(id)) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>checked.delete(id);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>el.classList.remove('checked');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>checked.add(id);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>el.classList.add('checked');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>localStorage.setItem('mp2026_checked', JSON.stringify([...checked]));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>updateProgress();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function updateProgress() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const pct = Math.round(checked.size / totalSteps * 100);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>document.getElementById('progBar').style.width = pct + '%';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>document.getElementById('progText').textContent = checked.size + ' / ' + totalSteps + ' done';</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">updateProgress();</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
