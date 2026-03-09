@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Possible 2026 — Action Sequence Animation</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0c10;
+  --surface: #1f2833;
+  --accent: #66fcf1;
+  --accent2: #45a29e;
+  --red: #fc6681;
+  --yellow: #fcdb66;
+  --orange: #fc9f66;
+  --text: #c5c6c7;
+  --bright: #ffffff;
+  --dim: #5c6370;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  overflow-x: hidden;
+}
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 8px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.top-bar h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 3px;
+  color: var(--accent);
+}
+.top-bar .tag {
+  background: var(--surface);
+  border: 1px solid var(--accent2);
+  padding: 4px 12px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 28px 16px;
+  flex-wrap: wrap;
+}
+.controls button {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  padding: 6px 16px;
+  border: 1px solid var(--accent2);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  transition: all .15s;
+  letter-spacing: .5px;
+}
+.controls button:hover { background: var(--accent2); color: var(--bright); }
+.controls button.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+.controls button:disabled { opacity: .3; cursor: default; }
+.progress-bar {
+  margin: 0 28px 4px;
+  height: 3px;
+  background: var(--surface);
+  position: relative;
+  cursor: pointer;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width .3s;
+  width: 0;
+}
+.stage-row {
+  display: flex;
+  padding: 0 28px;
+  gap: 4px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.stage-pip {
+  flex: 1;
+  min-width: 60px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  letter-spacing: .5px;
+  background: var(--surface);
+  border: 1px solid transparent;
+  color: var(--dim);
+  cursor: pointer;
+  transition: all .2s;
+  text-transform: uppercase;
+}
+.stage-pip.done { background: var(--accent2); color: var(--bright); border-color: var(--accent); }
+.stage-pip.current { background: var(--accent); color: var(--bg); font-weight: 600; border-color: var(--accent); }
+.main-canvas {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+canvas {
+  background: var(--surface);
+  border: 1px solid #2a3040;
+  max-width: 100%;
+}
+.info-panel {
+  margin: 16px 28px 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.info-card {
+  background: var(--surface);
+  border: 1px solid #2a3040;
+  padding: 16px 20px;
+  transition: border-color .3s;
+}
+.info-card.active { border-color: var(--accent); }
+.info-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.info-card p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.info-card .detail {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--dim);
+  border-top: 1px solid #2a3040;
+  padding-top: 8px;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.top-bar,.controls,.stage-row,.main-canvas,.info-panel { animation: fadeUp .5s ease-out both; }
+.controls { animation-delay:.05s; }
+.stage-row { animation-delay:.1s; }
+.main-canvas { animation-delay:.15s; }
+.info-panel { animation-delay:.2s; }
+@media (max-width:700px) {
+  .info-panel { grid-template-columns: 1fr; }
+  canvas { height: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>Action Sequence</h1>
+  <span class="tag">6-Action Rube Goldberg Chain</span>
+</div>
+
+<div class="controls">
+  <button id="btnPrev">&larr; Prev</button>
+  <button id="btnPlay" class="active">&#9654; Play</button>
+  <button id="btnNext">Next &rarr;</button>
+  <button id="btnReset">Reset</button>
+  <span style="margin-left:auto;font-size:10px;color:var(--dim)" id="stepLabel">START</span>
+</div>
+
+<div class="progress-bar" id="progBar"><div class="progress-fill" id="progFill"></div></div>
+
+<div class="stage-row" id="stageRow"></div>
+
+<div class="main-canvas">
+  <canvas id="cv" width="1000" height="560"></canvas>
+</div>
+
+<div class="info-panel">
+  <div class="info-card active" id="cardAction">
+    <h3 id="cardTitle">START — Cup Dump</h3>
+    <p id="cardDesc">Team pulls trigger string to release latch. Cup pivots and dumps all 30 items into the gated hopper below. Cup also pulls String A to trigger Action 1.</p>
+    <div class="detail" id="cardDetail">Items: 10 marbles + 10 paper clips + 10 golf tees</div>
+  </div>
+  <div class="info-card" id="cardPhysics">
+    <h3>Physics / IMA</h3>
+    <p id="physDesc">No simple machine requirement for the start action. This is the manual trigger.</p>
+    <div class="detail" id="physDetail">Energy source: Human pull on trigger string</div>
+  </div>
+</div>
+
+<script>
+const stages = [
+  {
+    id: 'start', name: 'START — Cup Dump',
+    desc: 'Team pulls trigger string to release a latch. The 16 oz cup pivots and dumps all 30 mixed items into the gated hopper below. The cup tilting also pulls String A, which triggers Action 1.',
+    phys: 'No simple machine requirement. This is the manual trigger that initiates the chain.',
+    detail: 'Items: 10 marbles + 10 paper clips + 10 golf tees in one cup',
+    physDetail: 'Energy source: Human pull on trigger string',
+    color: '#fc6681'
+  },
+  {
+    id: 'wedge', name: 'Action 1 — WEDGE',
+    desc: 'String A (from cup) pulls a wooden wedge block out of position. Behind the wedge: a golf ball held in a popsicle-stick channel. Wedge removal releases the ball, which rolls 20 cm down a sloped track into a small bucket.',
+    phys: 'Wedge is a required simple machine. The string converts the cup\'s rotational energy into linear pull to remove the wedge block.',
+    detail: 'Track: 20 cm popsicle-stick channel, 5 cm vertical drop',
+    physDetail: 'Golf ball mass: ~45 g · Rolls into bucket at bottom of track',
+    color: '#fcdb66'
+  },
+  {
+    id: 'wheel', name: 'Action 2 — WHEEL & AXLE',
+    desc: 'The bucket + golf ball (~55 g total) hangs from string wrapped around the wheel (R = 6 cm). A 50 g weight hangs from the axle (R = 3 cm) in opposite winding. As the bucket falls, it turns the wheel, which turns the axle, raising the 50 g weight 15 cm to hit a trigger lever.',
+    phys: 'IMA = R_wheel / R_axle = 6 cm / 3 cm = 2.0 (meets ≥ 2 requirement). Input force ~55 g >> 25 g needed. Reliable margin.',
+    detail: 'Bucket drops 30 cm · 50 g weight rises 15 cm',
+    physDetail: 'IMA = 2.0 · Input: 55 g · Load: 50 g · Margin: 2.2×',
+    color: '#fcdb66'
+  },
+  {
+    id: 'incline', name: 'Action 3 — INCLINED PLANE',
+    desc: 'Trigger lever from Action 2 releases a 50 g counterweight. The counterweight drops and pulls a 100 g object up a 30 cm inclined plane (10 cm rise) via string + pulley. At the top, the 100 g object tips onto a trigger arm.',
+    phys: 'IMA = ramp length / rise = 30 cm / 10 cm = 3.0 (meets ≥ 3 requirement). Force needed = 100 g / 3 = 33 g. Counterweight of 50 g provides reliable margin.',
+    detail: 'Ramp: 30 cm long, 10 cm vertical rise, ~19° angle',
+    physDetail: 'IMA = 3.0 · Input: 50 g · Load: 100 g/3 = 33 g · Margin: 1.5×',
+    color: '#fcdb66'
+  },
+  {
+    id: 'screw', name: 'Action 4 — SCREW',
+    desc: 'The 100 g object falls off the inclined plane onto a lever arm attached to a bolt head. The bolt passes through a fixed nut bracket. Impact turns the bolt ~1 full rotation, wrapping a string around the shaft. The string pulls the hopper gate pin out, opening the gate.',
+    phys: 'Screw is a required simple machine. The bolt converts rotational motion into linear pull on the gate string. One rotation of the bolt wraps enough string to extract the pin.',
+    detail: 'Bolt: standard long bolt + nut bracket · String to hopper gate: ~25 cm',
+    physDetail: 'Energy: 100 g falling from ramp top · Output: gate pin extraction',
+    color: '#fcdb66'
+  },
+  {
+    id: 'magnetic', name: 'Action 5 — MAGNETIC SORT',
+    desc: 'Items from the opened hopper slide down a 50 cm sorting ramp (20 cm wide, ~25° angle). Neodymium magnets mounted along the right wall at midpoint attract metal paper clips. Clips stick to wall and drop into Container 2. Non-magnetic items (marbles + tees) continue sliding down.',
+    phys: 'Magnetism provides selective separation force. The ramp angle must balance: steep enough for items to slide, shallow enough for magnets to capture clips before they pass.',
+    detail: 'Ramp: 50 cm × 20 cm, ~25° · 3–4 neodymium disc magnets (12 mm+)',
+    physDetail: 'Separates: paper clips (ferromagnetic) from marbles + tees (non-magnetic)',
+    color: '#66fcf1'
+  },
+  {
+    id: 'bargrid', name: 'Action 6 — BAR GRID SORT',
+    desc: 'At the bottom of the sorting ramp: a grid of parallel wooden dowels (3 mm diameter), spaced 10 mm apart center-to-center. Marbles (12–42 mm) are too large to fall through and roll across into Container 1. Golf tees (head ~8 mm, shaft ~4 mm) are small enough to fall through into Container 3 below.',
+    phys: 'Size-selective separation. The 10 mm gap is carefully chosen: larger than tee shafts (4 mm) and heads (8 mm) but smaller than the smallest marble (12 mm).',
+    detail: 'Dowels: 3 mm dia, 10 mm center-to-center spacing · ~15 dowels × 20 cm long',
+    physDetail: 'Result: marbles → C1, clips → C2, tees → C3. All 30 items sorted!',
+    color: '#66fcf1'
+  }
+];
+
+let currentStage = 0;
+let playing = false;
+let stageProgress = 0;
+let lastTime = 0;
+const STAGE_DURATION = 3500;
+
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const stageRow = document.getElementById('stageRow');
+
+stages.forEach((s, i) => {
+  const pip = document.createElement('div');
+  pip.className = 'stage-pip' + (i === 0 ? ' current' : '');
+  pip.textContent = s.id;
+  pip.addEventListener('click', () => goToStage(i));
+  stageRow.appendChild(pip);
+});
+
+function updateUI() {
+  const s = stages[currentStage];
+  document.getElementById('stepLabel').textContent =
+    'Step ' + (currentStage + 1) + ' / ' + stages.length;
+  document.getElementById('progFill').style.width =
+    ((currentStage + stageProgress) / stages.length * 100) + '%';
+
+  document.querySelectorAll('.stage-pip').forEach((p, i) => {
+    p.className = 'stage-pip' +
+      (i < currentStage ? ' done' : '') +
+      (i === currentStage ? ' current' : '');
+  });
+
+  document.getElementById('cardTitle').textContent = s.name;
+  document.getElementById('cardDesc').textContent = s.desc;
+  document.getElementById('cardDetail').textContent = s.detail;
+  document.getElementById('physDesc').textContent = s.phys;
+  document.getElementById('physDetail').textContent = s.physDetail;
+
+  document.getElementById('btnPlay').innerHTML =
+    playing ? '&#10074;&#10074; Pause' : '&#9654; Play';
+  document.getElementById('btnPlay').classList.toggle('active', playing);
+}
+
+function goToStage(i) {
+  currentStage = Math.max(0, Math.min(stages.length - 1, i));
+  stageProgress = 0;
+  updateUI();
+  drawScene();
+}
+
+document.getElementById('btnPrev').addEventListener('click', () => goToStage(currentStage - 1));
+document.getElementById('btnNext').addEventListener('click', () => goToStage(currentStage + 1));
+document.getElementById('btnReset').addEventListener('click', () => { playing = false; goToStage(0); });
+document.getElementById('btnPlay').addEventListener('click', () => {
+  playing = !playing;
+  if (playing) { lastTime = performance.now(); requestAnimationFrame(animate); }
+  updateUI();
+});
+
+document.getElementById('progBar').addEventListener('click', e => {
+  const r = e.target.getBoundingClientRect();
+  const pct = (e.clientX - r.left) / r.width;
+  const idx = Math.floor(pct * stages.length);
+  goToStage(idx);
+});
+
+function animate(now) {
+  if (!playing) return;
+  const dt = now - lastTime;
+  lastTime = now;
+  stageProgress += dt / STAGE_DURATION;
+  if (stageProgress >= 1) {
+    stageProgress = 0;
+    currentStage++;
+    if (currentStage >= stages.length) {
+      currentStage = stages.length - 1;
+      stageProgress = 1;
+      playing = false;
+    }
+  }
+  updateUI();
+  drawScene();
+  if (playing) requestAnimationFrame(animate);
+}
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
+
+function drawScene() {
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const t = ease(stageProgress);
+  const active = currentStage;
+
+  ctx.fillStyle = '#141820';
+  ctx.fillRect(0, 0, W, H);
+
+  drawBoard(W, H);
+
+  drawCupHopper(active, t, W, H);
+  drawWedge(active, t, W, H);
+  drawWheelAxle(active, t, W, H);
+  drawIncline(active, t, W, H);
+  drawScrew(active, t, W, H);
+  drawSortRamp(active, t, W, H);
+  drawBarGrid(active, t, W, H);
+  drawContainers(active, t, W, H);
+
+  if (active >= 0) drawEnergyPulse(active, t, W, H);
+}
+
+function drawBoard(W, H) {
+  ctx.strokeStyle = '#2a3040';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(40, 30, W - 80, H - 60);
+
+  ctx.fillStyle = '#1a1e28';
+  ctx.fillRect(40, H - 30, W - 80, 2);
+
+  ctx.fillStyle = '#2a3040';
+  ctx.font = '10px "IBM Plex Mono"';
+  ctx.fillText('85 cm', W / 2 - 15, H - 12);
+  ctx.save();
+  ctx.translate(18, H / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('85 cm height', 0, 0);
+  ctx.restore();
+}
+
+function glow(color, blur) {
+  ctx.shadowColor = color;
+  ctx.shadowBlur = blur;
+}
+function noGlow() {
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur = 0;
+}
+
+function drawCupHopper(active, t, W, H) {
+  const isActive = active === 0;
+  const isDone = active > 0;
+  const cupX = 100, cupBaseY = 120;
+  const cupW = 50, cupH = 35;
+
+  let angle = 0;
+  if (isActive) angle = t * 1.2;
+  else if (isDone) angle = 1.2;
+
+  ctx.save();
+  ctx.translate(cupX, cupBaseY);
+  ctx.rotate(angle);
+
+  if (isActive) glow('#fc6681', 12);
+  ctx.fillStyle = isDone ? '#3a2030' : '#fc668188';
+  ctx.strokeStyle = isActive ? '#fc6681' : (isDone ? '#5a3040' : '#fc668166');
+  ctx.lineWidth = isActive ? 2 : 1;
+  ctx.beginPath();
+  ctx.moveTo(-cupW/2, 0);
+  ctx.lineTo(-cupW/2 + 8, -cupH);
+  ctx.lineTo(cupW/2 - 8, -cupH);
+  ctx.lineTo(cupW/2, 0);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  noGlow();
+
+  if (isActive && t > 0.2) {
+    const count = Math.floor((t - 0.2) * 12);
+    for (let i = 0; i < count; i++) {
+      const px = cupX + Math.sin(i * 2.3) * 15;
+      const py = cupBaseY + 20 + i * 8 + (t - 0.2) * 60;
+      const colors = ['#fc6681', '#fcdb66', '#66fcf1'];
+      ctx.fillStyle = colors[i % 3];
+      ctx.beginPath();
+      ctx.arc(px, Math.min(py, 380), 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+
+  ctx.fillStyle = isActive ? '#fc6681' : '#5a3040';
+  ctx.font = (isActive ? '600 ' : '') + '10px "IBM Plex Mono"';
+  ctx.fillText('CUP', cupX - 12, cupBaseY - cupH - 10);
+
+  const hopX = 90, hopY = 200, hopW = 70, hopH = 160;
+  const gateOpen = active >= 4 ? 1 : (active === 4 ? t : 0);
+
+  ctx.fillStyle = '#fc668122';
+  ctx.strokeStyle = active >= 4 ? '#45a29e' : '#fc668155';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(hopX, hopY);
+  ctx.lineTo(hopX - 15, hopY + hopH);
+  ctx.lineTo(hopX + hopW + 15, hopY + hopH);
+  ctx.lineTo(hopX + hopW, hopY);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+
+  if (active < 5) {
+    ctx.fillStyle = '#fc668188';
+    ctx.fillRect(hopX + 5, hopY + hopH - 5, hopW - 10, 5);
+  }
+
+  ctx.fillStyle = '#5a3040';
+  ctx.font = '10px "IBM Plex Mono"';
+  ctx.fillText('HOPPER', hopX + 8, hopY + 20);
+}
+
+function drawWedge(active, t, W, H) {
+  const isActive = active === 1;
+  const isDone = active > 1;
+  const baseX = 260, baseY = 115;
+
+  if (isActive) glow('#fcdb66', 10);
+  ctx.strokeStyle = isActive ? '#fcdb66' : (isDone ? '#5a4a20' : '#fcdb6644');
+  ctx.fillStyle = isActive ? '#fcdb6633' : '#fcdb6611';
+  ctx.lineWidth = isActive ? 2 : 1;
+  ctx.beginPath();
+  ctx.moveTo(baseX, baseY);
+  ctx.lineTo(baseX + 120, baseY + 30);
+  ctx.lineTo(baseX, baseY + 30);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  noGlow();
+
+  let wedgeOffset = 0;
+  if (isActive) wedgeOffset = t * 30;
+  else if (isDone) wedgeOffset = 30;
+
+  ctx.fillStyle = isActive ? '#fcdb66' : '#5a4a20';
+  ctx.beginPath();
+  ctx.moveTo(baseX + 10 - wedgeOffset, baseY + 5);
+  ctx.lineTo(baseX + 25 - wedgeOffset, baseY + 5);
+  ctx.lineTo(baseX + 10 - wedgeOffset, baseY + 25);
+  ctx.closePath();
+  ctx.fill();
+
+  if (isActive && t > 0.3) {
+    const ballX = lerp(baseX + 30, baseX + 120, (t - 0.3) / 0.7);
+    const ballY = lerp(baseY + 10, baseY + 25, (t - 0.3) / 0.7);
+    glow('#fcdb66', 8);
+    ctx.fillStyle = '#fcdb66';
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, 6, 0, Math.PI * 2);
+    ctx.fill();
+    noGlow();
+  } else if (isDone) {
+    ctx.fillStyle = '#5a4a20';
+    ctx.beginPath();
+    ctx.arc(baseX + 120, baseY + 25, 6, 0, Math.PI * 2);
+    ctx.fill();
+  } else {
+    ctx.fillStyle = '#fcdb6644';
+    ctx.beginPath();
+    ctx.arc(baseX + 30, baseY + 10, 6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.fillStyle = isActive ? '#fcdb66' : '#5a4a20';
+  ctx.font = (isActive ? '600 ' : '') + '10px "IBM Plex Mono"';
+  ctx.fillText('1. WEDGE', baseX, baseY - 8);
+
+  if (active >= 1) {
+    ctx.strokeStyle = '#f77f0044';
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(145, 130);
+    ctx.lineTo(baseX - 5, baseY + 15);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#f77f00';
+    ctx.font = '8px "IBM Plex Mono"';
+    ctx.fillText('String A', 170, 125);
+  }
+}
+
+function drawWheelAxle(active, t, W, H) {
+  const isActive = active === 2;
+  const isDone = active > 2;
+  const cx = 500, cy = 200;
+  const wheelR = 36, axleR = 18;
+
+  let rotation = 0;
+  if (isActive) rotation = t * Math.PI * 2;
+  else if (isDone) rotation = Math.PI * 2;
+
+  if (isActive) glow('#fcdb66', 10);
+  ctx.strokeStyle = isActive ? '#fcdb66' : (isDone ? '#5a4a20' : '#fcdb6644');
+  ctx.lineWidth = isActive ? 2 : 1;
+  ctx.beginPath();
+  ctx.arc(cx, cy, wheelR, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(cx, cy, axleR, 0, Math.PI * 2);
+  ctx.stroke();
+  noGlow();
+
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(rotation);
+  ctx.strokeStyle = isActive ? '#fcdb6688' : '#fcdb6622';
+  for (let i = 0; i < 4; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(wheelR * Math.cos(i * Math.PI / 2), wheelR * Math.sin(i * Math.PI / 2));
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  const bucketY = isActive ? lerp(cy - wheelR - 20, cy + wheelR + 40, t) : (isDone ? cy + wheelR + 40 : cy - wheelR - 20);
+  ctx.fillStyle = isActive ? '#fcdb6688' : '#fcdb6633';
+  ctx.fillRect(cx + wheelR + 10, bucketY, 20, 15);
+  ctx.strokeStyle = isActive ? '#fcdb66' : '#fcdb6644';
+  ctx.strokeRect(cx + wheelR + 10, bucketY, 20, 15);
+
+  const weightY = isActive ? lerp(cy + axleR + 30, cy - axleR - 10, t) : (isDone ? cy - axleR - 10 : cy + axleR + 30);
+  ctx.fillStyle = isActive ? '#fc668188' : '#fc668133';
+  ctx.fillRect(cx - axleR - 30, weightY, 16, 16);
+  ctx.strokeStyle = isActive ? '#fc6681' : '#fc668144';
+  ctx.strokeRect(cx - axleR - 30, weightY, 16, 16);
+
+  ctx.fillStyle = isActive ? '#fcdb66' : '#5a4a20';
+  ctx.font = (isActive ? '600 ' : '') + '10px "IBM Plex Mono"';
+  ctx.fillText('2. WHEEL & AXLE', cx - 50, cy - wheelR - 16);
+
+  if (isActive) {
+    ctx.fillStyle = '#fcdb66';
+    ctx.font = '9px "IBM Plex Mono"';
+    ctx.fillText('IMA = 2.0', cx - 18, cy + 4);
+    ctx.fillText('R=6cm', cx + wheelR + 4, cy - 8);
+    ctx.fillText('r=3cm', cx + axleR + 4, cy + 12);
+  }
+}
+
+function drawIncline(active, t, W, H) {
+  const isActive = active === 3;
+  const isDone = active > 3;
+  const x1 = 620, y1 = 290, x2 = 820, y2 = 220;
+
+  if (isActive) glow('#fcdb66', 10);
+  ctx.strokeStyle = isActive ? '#fcdb66' : (isDone ? '#5a4a20' : '#fcdb6644');
+  ctx.fillStyle = isActive ? '#fcdb6622' : '#fcdb6611';
+  ctx.lineWidth = isActive ? 2 : 1;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.lineTo(x2, y1);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  noGlow();
+
+  let objPos = 0;
+  if (isActive) objPos = t;
+  else if (isDone) objPos = 1;
+
+  const objX = lerp(x1 + 10, x2 - 20, objPos);
+  const objY = lerp(y1 - 12, y2 - 12, objPos);
+  ctx.fillStyle = isActive ? '#fc6681' : '#fc668144';
+  ctx.fillRect(objX - 8, objY - 8, 16, 16);
+  ctx.strokeStyle = isActive ? '#fc6681' : '#fc668133';
+  ctx.strokeRect(objX - 8, objY - 8, 16, 16);
+  ctx.fillStyle = isActive ? '#fff' : '#fc668166';
+  ctx.font = '8px "IBM Plex Mono"';
+  ctx.fillText('100g', objX - 12, objY + 24);
+
+  ctx.fillStyle = isActive ? '#fcdb66' : '#5a4a20';
+  ctx.font = (isActive ? '600 ' : '') + '10px "IBM Plex Mono"';
+  ctx.fillText('3. INCLINED PLANE', x1, y2 - 16);
+
+  if (isActive) {
+    ctx.fillStyle = '#fcdb66';
+    ctx.font = '9px "IBM Plex Mono"';
+    ctx.fillText('IMA = 3.0', (x1 + x2) / 2 - 20, y1 + 20);
+    ctx.fillText('30cm', (x1 + x2) / 2, y2 - 4);
+
+    ctx.strokeStyle = '#fcdb6644';
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(x2, y2); ctx.lineTo(x2, y1);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillText('10cm', x2 + 6, (y1 + y2) / 2 + 4);
+  }
+}
+
+function drawScrew(active, t, W, H) {
+  const isActive = active === 4;
+  const isDone = active > 4;
+  const cx = 600, cy = 370;
+  const boltLen = 80;
+
+  if (isActive) glow('#fcdb66', 10);
+  ctx.strokeStyle = isActive ? '#fcdb66' : (isDone ? '#5a4a20' : '#fcdb6644');
+  ctx.lineWidth = isActive ? 2 : 1;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(cx + boltLen, cy);
+  ctx.stroke();
+
+  for (let i = 0; i < 8; i++) {
+    const sx = cx + 10 + i * 9;
+    ctx.beginPath();
+    ctx.moveTo(sx, cy - 6);
+    ctx.lineTo(sx + 5, cy + 6);
+    ctx.stroke();
+  }
+  noGlow();
+
+  ctx.fillStyle = isActive ? '#fcdb6644' : '#fcdb6622';
+  ctx.fillRect(cx + boltLen - 5, cy - 12, 10, 24);
+  ctx.strokeRect(cx + boltLen - 5, cy - 12, 10, 24);
+
+  let rotation = 0;
+  if (isActive) rotation = t * Math.PI * 2;
+  else if (isDone) rotation = Math.PI * 2;
+
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(rotation);
+  ctx.fillStyle = isActive ? '#fcdb66' : '#5a4a20';
+  ctx.fillRect(-12, -12, 24, 24);
+  ctx.strokeStyle = isActive ? '#fcdb66' : '#5a4a2088';
+  ctx.strokeRect(-12, -12, 24, 24);
+  ctx.beginPath();
+  ctx.moveTo(-8, 0); ctx.lineTo(8, 0);
+  ctx.moveTo(0, -8); ctx.lineTo(0, 8);
+  ctx.stroke();
+  ctx.restore();
+
+  if (isActive && t > 0.5) {
+    ctx.strokeStyle = '#f77f00';
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath();
+    ctx.moveTo(cx - 20, cy);
+    ctx.lineTo(140, 365);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#f77f00';
+    ctx.font = '8px "IBM Plex Mono"';
+    ctx.fillText('pulls gate pin', 250, 358);
+  }
+
+  ctx.fillStyle = isActive ? '#fcdb66' : '#5a4a20';
+  ctx.font = (isActive ? '600 ' : '') + '10px "IBM Plex Mono"';
+  ctx.fillText('4. SCREW', cx - 10, cy - 28);
+}
+
+function drawSortRamp(active, t, W, H) {
+  const isActive = active === 5;
+  const isDone = active > 5;
+  const x1 = 140, y1 = 380, x2 = 480, y2 = 480;
+
+  if (isActive) glow('#66fcf1', 10);
+  ctx.strokeStyle = isActive ? '#66fcf1' : (isDone ? '#1a3a38' : '#66fcf133');
+  ctx.fillStyle = isActive ? '#66fcf111' : '#66fcf108';
+  ctx.lineWidth = isActive ? 2 : 1;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.lineTo(x2, y2 + 15);
+  ctx.lineTo(x1, y1 + 15);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  noGlow();
+
+  const magX = lerp(x1, x2, 0.45);
+  const magY = lerp(y1, y2, 0.45);
+  for (let i = 0; i < 4; i++) {
+    ctx.fillStyle = isActive ? '#fc6681' : '#fc668133';
+    ctx.beginPath();
+    ctx.arc(magX + i * 18, magY - 10, 6, 0, Math.PI * 2);
+    ctx.fill();
+    if (isActive) {
+      ctx.strokeStyle = '#fc668144';
+      ctx.beginPath();
+      ctx.arc(magX + i * 18, magY - 10, 10 + Math.sin(performance.now() / 300 + i) * 3, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  if (isActive) {
+    const count = Math.floor(t * 8);
+    for (let i = 0; i < count; i++) {
+      const pos = (t * 0.8 + i * 0.1) % 1;
+      const ix = lerp(x1 + 20, x2 - 20, pos);
+      const iy = lerp(y1 + 7, y2 + 7, pos);
+
+      if (i % 3 === 0 && pos > 0.35 && pos < 0.55) {
+        glow('#fc6681', 6);
+        ctx.fillStyle = '#fc6681';
+        ctx.beginPath();
+        ctx.arc(magX + (i % 4) * 18, magY - 10, 3, 0, Math.PI * 2);
+        ctx.fill();
+        noGlow();
+      } else {
+        const colors = ['#fcdb66', '#66fcf1'];
+        ctx.fillStyle = colors[i % 2];
+        ctx.beginPath();
+        ctx.arc(ix, iy, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  }
+
+  ctx.fillStyle = isActive ? '#66fcf1' : '#1a3a38';
+  ctx.font = (isActive ? '600 ' : '') + '10px "IBM Plex Mono"';
+  ctx.fillText('5. MAGNETIC SORT', x1, y1 - 10);
+
+  if (isActive) {
+    ctx.fillStyle = '#fc6681';
+    ctx.font = '9px "IBM Plex Mono"';
+    ctx.fillText('magnets', magX - 10, magY - 22);
+    ctx.fillStyle = '#66fcf1';
+    ctx.fillText('clips stick ↓', magX + 30, magY + 30);
+  }
+}
+
+function drawBarGrid(active, t, W, H) {
+  const isActive = active === 6;
+  const isDone = active > 6;
+  const x = 520, y = 460, w = 130, h = 40;
+
+  if (isActive) glow('#66fcf1', 10);
+  ctx.strokeStyle = isActive ? '#66fcf1' : '#66fcf133';
+  ctx.lineWidth = isActive ? 1.5 : 0.5;
+
+  for (let i = 0; i <= 12; i++) {
+    const bx = x + i * (w / 12);
+    ctx.beginPath();
+    ctx.moveTo(bx, y);
+    ctx.lineTo(bx, y + h);
+    ctx.stroke();
+  }
+  ctx.strokeRect(x, y, w, h);
+  noGlow();
+
+  if (isActive) {
+    for (let i = 0; i < 5; i++) {
+      const pos = Math.min(1, (t * 1.5 - i * 0.15));
+      if (pos < 0) continue;
+
+      const mx = x + 15 + i * 22;
+      const my = y - 4;
+      ctx.fillStyle = '#fcdb66';
+      ctx.beginPath();
+      ctx.arc(lerp(mx, x + w + 30, ease(pos)), my + 2, 5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    for (let i = 0; i < 5; i++) {
+      const pos = Math.min(1, (t * 1.3 - i * 0.12));
+      if (pos < 0) continue;
+      const tx = x + 20 + i * 20;
+      ctx.fillStyle = '#66fcf1';
+      ctx.beginPath();
+      const ty = lerp(y + 5, y + h + 30, ease(pos));
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - 3, ty + 8);
+      ctx.lineTo(tx + 3, ty + 8);
+      ctx.fill();
+    }
+  }
+
+  ctx.fillStyle = isActive ? '#66fcf1' : '#1a3a38';
+  ctx.font = (isActive ? '600 ' : '') + '10px "IBM Plex Mono"';
+  ctx.fillText('6. BAR GRID', x, y - 12);
+
+  if (isActive) {
+    ctx.fillStyle = '#fcdb66';
+    ctx.font = '8px "IBM Plex Mono"';
+    ctx.fillText('marbles roll →', x + w + 8, y + 10);
+    ctx.fillStyle = '#66fcf1';
+    ctx.fillText('tees fall ↓', x + 30, y + h + 18);
+    ctx.fillStyle = '#7d8590';
+    ctx.fillText('10mm gaps', x + 40, y + h / 2 + 3);
+  }
+}
+
+function drawContainers(active, t, W, H) {
+  const containers = [
+    { label: 'C1 Marbles', x: 700, y: 490, color: '#48bfe3', fill: active >= 6 },
+    { label: 'C2 Clips', x: 280, y: 500, color: '#48bfe3', fill: active >= 5 },
+    { label: 'C3 Tees', x: 540, y: 510, color: '#48bfe3', fill: active >= 6 }
+  ];
+
+  containers.forEach(c => {
+    const isFilling = c.fill;
+    ctx.fillStyle = isFilling ? c.color + '33' : c.color + '11';
+    ctx.strokeStyle = isFilling ? c.color : c.color + '44';
+    ctx.lineWidth = isFilling ? 1.5 : 1;
+    ctx.fillRect(c.x, c.y, 60, 30);
+    ctx.strokeRect(c.x, c.y, 60, 30);
+
+    ctx.fillStyle = isFilling ? c.color : c.color + '66';
+    ctx.font = '9px "IBM Plex Mono"';
+    ctx.fillText(c.label, c.x + 3, c.y + 18);
+  });
+}
+
+function drawEnergyPulse(active, t, W, H) {
+  const pulsePoints = [
+    [120, 130], [300, 130], [500, 200],
+    [720, 255], [600, 370], [300, 430], [580, 470]
+  ];
+
+  if (active < pulsePoints.length) {
+    const [px, py] = pulsePoints[active];
+    const r = 20 + Math.sin(performance.now() / 200) * 8;
+    const col = stages[active].color;
+    ctx.strokeStyle = col + '44';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(px, py, r, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(px, py, r * 0.6, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+updateUI();
+drawScene();
+
+setInterval(() => {
+  if (!playing) drawScene();
+}, 100);
+</script>
+</body>
+</html>
+
