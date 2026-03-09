@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Possible 2026 — Build Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf7f2;
+  --surface: #fff;
+  --border: #e8e2d9;
+  --accent: #d4421e;
+  --accent2: #1a6b4f;
+  --dark: #1a1a1a;
+  --text: #3a3632;
+  --dim: #9a928a;
+  --yellow: #e8a820;
+  --green: #2a8a5f;
+  --blue: #2a6a9a;
+  --checkedBg: #f0ede8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.6;
+  padding-bottom: 60px;
+}
+.masthead {
+  padding: 40px 40px 24px;
+  border-bottom: 3px solid var(--dark);
+  margin-bottom: 32px;
+}
+.masthead h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  letter-spacing: -1px;
+  color: var(--dark);
+  line-height: 1.1;
+}
+.masthead .tagline {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.stats-bar {
+  display: flex;
+  gap: 28px;
+  padding: 0 40px 28px;
+  flex-wrap: wrap;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+.stat-val {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-lbl {
+  font-size: 10px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+.progress-summary {
+  margin: 0 40px 28px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.progress-bar-outer {
+  flex: 1;
+  height: 8px;
+  background: var(--border);
+  position: relative;
+}
+.progress-bar-inner {
+  height: 100%;
+  background: var(--accent2);
+  transition: width .3s;
+  width: 0%;
+}
+.progress-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent2);
+  min-width: 90px;
+  text-align: right;
+}
+.phase {
+  margin: 0 40px 32px;
+}
+.phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--dark);
+}
+.phase-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  background: var(--dark);
+  color: var(--bg);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.phase-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--dark);
+}
+.phase-time {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.step {
+  display: flex;
+  gap: 14px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+}
+.step:hover { border-color: var(--accent); }
+.step.checked {
+  background: var(--checkedBg);
+  opacity: .7;
+}
+.step.checked .step-text { text-decoration: line-through; color: var(--dim); }
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+  font-size: 12px;
+  color: transparent;
+}
+.step.checked .checkbox {
+  border-color: var(--accent2);
+  background: var(--accent2);
+  color: #fff;
+}
+.step-body { flex: 1; }
+.step-text {
+  font-size: 12px;
+  transition: all .15s;
+}
+.step-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--dim);
+}
+.step-meta .time-est { color: var(--blue); }
+.step-meta .materials { color: var(--accent); }
+.test-checkpoint {
+  margin: 8px 0 12px;
+  padding: 10px 16px;
+  background: #fef9e7;
+  border-left: 4px solid var(--yellow);
+  font-size: 11px;
+}
+.test-checkpoint strong {
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.tip-box {
+  margin: 8px 0 4px;
+  padding: 10px 16px;
+  background: #edf7f1;
+  border-left: 4px solid var(--green);
+  font-size: 11px;
+}
+.tip-box strong {
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.footer-note {
+  margin: 40px 40px 0;
+  padding: 20px 0 0;
+  border-top: 2px solid var(--dark);
+  font-size: 11px;
+  color: var(--dim);
+  line-height: 1.8;
+}
+.footer-note strong { color: var(--dark); }
+@media print {
+  body { background: #fff; }
+  .step:hover { border-color: var(--border); }
+}
+@keyframes slideIn {
+  from { opacity:0; transform:translateX(-12px); }
+  to { opacity:1; transform:translateX(0); }
+}
+.phase { animation: slideIn .4s ease-out both; }
+.phase:nth-child(2) { animation-delay: .05s; }
+.phase:nth-child(3) { animation-delay: .1s; }
+.phase:nth-child(4) { animation-delay: .15s; }
+.phase:nth-child(5) { animation-delay: .2s; }
+.phase:nth-child(6) { animation-delay: .25s; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <h1>Build Guide</h1>
+  <div class="tagline">Mission Possible 2026 &mdash; 6-Action Rube Goldberg Sorter &mdash; Step-by-step construction checklist</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-val">~4h</span><span class="stat-lbl">Total Build Time</span></div>
+  <div class="stat"><span class="stat-val">6</span><span class="stat-lbl">Phases</span></div>
+  <div class="stat"><span class="stat-val" id="totalSteps">0</span><span class="stat-lbl">Steps</span></div>
+  <div class="stat"><span class="stat-val">4</span><span class="stat-lbl">Required Machines</span></div>
+</div>
+
+<div class="progress-summary">
+  <div class="progress-bar-outer"><div class="progress-bar-inner" id="progBar"></div></div>
+  <div class="progress-text" id="progText">0 / 0 done</div>
+</div>
+
+<div id="phases"></div>
+
+<div class="footer-note">
+  <strong>Before competition day:</strong> Run the full device 20+ times and record completion times. Set your target time to the average. Bring backup string, extra magnets, and spare popsicle sticks. Arrive early to re-calibrate ramp angles if the competition surface is different from your build surface.
+</div>
+
+<script>
+const data = [
+  {
+    title: 'Base & Framework',
+    time: '~30 min',
+    steps: [
+      { text: 'Lay out the 85×85 cm plywood base board on a flat work surface. Mark the center and edges.', time: '3 min', mat: 'Plywood base' },
+      { text: 'Attach the 85×85 cm backboard vertically along the back edge using wood screws or heavy-duty brackets. Ensure it is perpendicular.', time: '8 min', mat: 'Backboard, screws, brackets' },
+      { text: 'Mark component positions on the base and backboard using the layout diagram. Draw outlines for: Cup cradle (5–20 cm, h=65–75 cm), Hopper (5–25 cm, h=35–65 cm), Machine zone (30–80 cm, h=25–65 cm), Sorting zone (10–75 cm, h=0–35 cm).', time: '10 min', mat: 'Pencil, ruler, layout diagram' },
+      { text: 'Build vertical support pillars from scrap wood at key heights: 70 cm (cup), 55 cm (wheel & axle), 40 cm (inclined plane), 30 cm (screw). Glue/screw to backboard.', time: '10 min', mat: 'Scrap wood, screws, hot glue' }
+    ],
+    test: null,
+    tip: 'Measure twice, cut once. Accurate positioning now saves hours of troubleshooting later.'
+  },
+  {
+    title: 'Start Mechanism (Cup + Hopper)',
+    time: '~30 min',
+    steps: [
+      { text: 'Build the cup cradle from popsicle sticks at h=70 cm on the left support pillar. Create a pivot point at the back so the cup can tip forward.', time: '8 min', mat: 'Popsicle sticks, hot glue, 16 oz cup' },
+      { text: 'Install a small latch/pin mechanism that holds the cup level. Attach a trigger string that, when pulled, releases the latch.', time: '8 min', mat: 'String, small nail/pin' },
+      { text: 'Build the hopper from cardboard: a funnel shape 20×20 cm opening at top, narrowing to ~10 cm at the bottom gate. Mount below the cup cradle (h=35–65 cm).', time: '10 min', mat: 'Cardboard, hot glue, tape' },
+      { text: 'Install the hopper gate: a pin/latch at the bottom of the hopper that holds items inside. The gate pin will be pulled by the screw mechanism (Action 4) later.', time: '5 min', mat: 'Pin, string attachment point' },
+      { text: 'Attach String A from the cup base to the wedge location (30 cm right, same height). Leave slack — it should go taut only when the cup tips fully.', time: '4 min', mat: 'String/twine (~40 cm)' }
+    ],
+    test: 'Load 5 test items into the cup. Pull the trigger string. Verify: (1) cup tips cleanly, (2) items fall into hopper, (3) String A goes taut and has enough pull force to move a small block. Run 10 times.',
+    tip: 'The cup must tip far enough to dump ALL items, but not so far that it jams. Aim for ~70° rotation.'
+  },
+  {
+    title: 'Simple Machines Chain (Actions 1–4)',
+    time: '~90 min',
+    steps: [
+      { text: 'ACTION 1 — WEDGE: Build a 20 cm popsicle-stick channel/track at h=60–65 cm starting at x=30 cm. Angle it ~15° downward toward the wheel & axle area.', time: '10 min', mat: 'Popsicle sticks, hot glue' },
+      { text: 'Carve/cut a small triangular wood wedge block. Place it at the start of the track to block the golf ball. Tie String A to the wedge so pulling it slides the wedge out.', time: '8 min', mat: 'Wood block, string' },
+      { text: 'Test Action 1 independently: place golf ball behind wedge, pull string, ball should roll full length of track and drop into a target area.', time: '5 min', mat: 'Golf ball' },
+      { text: 'ACTION 2 — WHEEL & AXLE: Mount a wheel (R=6 cm disc) and axle (R=3 cm dowel/spool) on a horizontal axle at h=55 cm, x=55–70 cm. The axle must spin freely.', time: '15 min', mat: 'Wood disc/cardboard wheel, dowel, support brackets' },
+      { text: 'Wrap a string around the wheel, attach a small bucket at the end (where the golf ball will land). Wrap another string around the axle in the opposite direction, attach the 50 g weight.', time: '8 min', mat: 'String, small bucket/cup, 50 g weight' },
+      { text: 'Test Action 2 independently: drop golf ball into bucket. Verify the 50 g weight rises at least 15 cm. The weight must rise enough to hit a trigger lever.', time: '5 min', mat: 'Golf ball' },
+      { text: 'ACTION 3 — INCLINED PLANE: Build a 30 cm ramp at x=55–80 cm with 10 cm vertical rise (bottom at h=30 cm, top at h=40 cm). Use stiff cardboard or wood with low-friction surface.', time: '10 min', mat: '30 cm ramp piece, supports' },
+      { text: 'Install a pulley at the top of the ramp. Run string from the 100 g object (on the ramp) over the pulley to a 50 g counterweight. Build a trigger lever that the rising 50 g weight from Action 2 hits to release the counterweight.', time: '12 min', mat: 'Pulley/nail, string, 100 g object, 50 g counterweight' },
+      { text: 'Test Action 3 independently: release the counterweight and verify the 100 g object reaches the top of the ramp and tips off the end.', time: '5 min', mat: '' },
+      { text: 'ACTION 4 — SCREW: Mount a long bolt through a fixed nut bracket at h=30 cm, x=50–65 cm. The bolt head should have a lever arm where the 100 g object can land.', time: '10 min', mat: 'Long bolt, nut, bracket, lever arm' },
+      { text: 'Attach a string from the bolt shaft to the hopper gate pin (~25 cm of string). When the bolt rotates, the string should wrap around the shaft and pull the pin out.', time: '8 min', mat: 'String (~30 cm)' },
+      { text: 'Test Action 4 independently: drop a weight onto the lever arm. Verify the bolt turns enough to pull the gate string tight and extract the pin.', time: '5 min', mat: '100 g test weight' }
+    ],
+    test: 'Connect Actions 1–4 in sequence. Pull String A (simulating cup trigger). Verify the complete chain: wedge pulls → ball rolls → bucket drops → weight rises → counterweight releases → object climbs ramp → falls onto screw → gate pin pulls out. Run the full chain 10 times. Success rate should be > 80% before proceeding.',
+    tip: 'If any action fails intermittently, add more margin: steeper track, heavier bucket, bigger counterweight. Reliability > elegance.'
+  },
+  {
+    title: 'Sorting Ramp + Magnets (Action 5)',
+    time: '~40 min',
+    steps: [
+      { text: 'Build the sorting ramp: 50 cm long, 20 cm wide, starting at h=35 cm (below the hopper gate) and ending at h=10 cm. Use cardboard or thin plywood with raised side walls (~3 cm high).', time: '15 min', mat: 'Cardboard/plywood, side walls' },
+      { text: 'Mount 3–4 neodymium disc magnets along the right wall of the ramp at the midpoint (approximately 25 cm from the top). Space them 3–4 cm apart vertically.', time: '8 min', mat: '3–4 neodymium magnets, hot glue/tape' },
+      { text: 'Position Container 2 (for clips) directly below the magnet section. Build a small chute/guide if needed to direct falling clips into the container.', time: '5 min', mat: 'Container/box, optional chute' },
+      { text: 'Adjust the ramp angle to ~25°. Test with individual items: paper clips should stick to magnets and drop into C2. Marbles and tees should slide past without stopping.', time: '10 min', mat: 'Test items' },
+      { text: 'Fine-tune magnet placement: if clips aren\'t captured, move magnets closer to the ramp surface or add more. If marbles are slowing down near magnets, ensure they are non-magnetic steel balls (not chrome steel).', time: '5 min', mat: '' }
+    ],
+    test: 'Release 10 paper clips, 5 marbles, and 5 tees from the top of the sorting ramp one at a time. Verify: (1) all clips stick to magnets and fall into C2, (2) all marbles and tees slide past magnets. Then release all 20 at once and verify separation. Success rate must be 100% for clips, 95%+ for pass-through items.',
+    tip: 'The ramp angle is the most critical variable. Too steep = clips fly past magnets. Too shallow = items get stuck. Start at 25° and adjust in 2° increments.'
+  },
+  {
+    title: 'Bar Grid Separator (Action 6)',
+    time: '~30 min',
+    steps: [
+      { text: 'Cut 15 wooden dowels (3 mm diameter) to 20 cm length each.', time: '5 min', mat: '3 mm dowels, saw/snips' },
+      { text: 'Build a frame from popsicle sticks or thin wood strips (two parallel rails, 20 cm apart). Drill or cut 15 evenly spaced notches at 10 mm center-to-center spacing.', time: '12 min', mat: 'Frame material, drill/knife' },
+      { text: 'Glue all 15 dowels into the frame notches. Ensure they are parallel and the gaps are consistent at 10 mm (7 mm clear gap between 3 mm dowels).', time: '8 min', mat: 'Hot glue' },
+      { text: 'Mount the bar grid at the bottom of the sorting ramp (x=55–75 cm, h=5–10 cm) with a slight tilt so marbles roll across into Container 1. Position Container 3 directly below for tees.', time: '5 min', mat: 'Mounting supports, C1 and C3 containers' },
+      { text: 'Test with actual competition items: drop marbles one at a time (all should roll across), then tees (all should fall through). Adjust spacing if any item behaves unexpectedly.', time: '5 min', mat: 'Test marbles and tees' }
+    ],
+    test: 'Release 10 marbles and 10 tees from the sorting ramp (after the magnet section). Verify: (1) all marbles roll across the bar grid into Container 1, (2) all golf tees fall through into Container 3. Test 5 times. Also test with items arriving at speed (not just dropped gently).',
+    tip: 'Measure the gaps with calipers if possible. Even 1 mm error can cause a marble to jam or a tee to not fall through. The actual items you\'ll use in competition may differ from practice items — bring extras to calibrate on-site.'
+  },
+  {
+    title: 'Integration & Rehearsal',
+    time: '~60 min',
+    steps: [
+      { text: 'Connect all subsystems: Cup → Hopper (items) + String A → Wedge → Wheel & Axle → Inclined Plane → Screw → Gate opens → Sorting ramp → Magnetic sort → Bar grid → 3 containers.', time: '15 min', mat: '' },
+      { text: 'Load all 30 items (10 marbles + 10 clips + 10 tees) into the cup. Run the full device. Note any failures or jams.', time: '5 min', mat: 'All 30 items' },
+      { text: 'Fix any issues found in the first full run. Common problems: string too tight/loose, ramp angle off, items jamming in hopper, magnets not strong enough, bar grid spacing inconsistent.', time: '15 min', mat: 'Adjustment tools' },
+      { text: 'Run the device 10 more times. Record: (a) completion time for each run, (b) any failures, (c) final item counts in each container. Target: 100% sort accuracy, < 5% failure rate on chain.', time: '15 min', mat: 'Stopwatch, notebook' },
+      { text: 'Calculate your average run time. This is your competition target time. Practice announcing the target time before each run.', time: '5 min', mat: '' },
+      { text: 'Pack backup supplies: extra string, spare magnets, extra popsicle sticks, hot glue gun + sticks, duct tape, tweezers for adjustments. Label all containers.', time: '5 min', mat: 'Backup supplies' }
+    ],
+    test: 'FINAL VALIDATION: Run the complete device 5 times in a row without touching it between runs (just reload items). All 5 runs must: (1) complete the full 6-action chain, (2) correctly sort all 30 items, (3) finish within ±10% of your target time. If any run fails, diagnose and fix before competition.',
+    tip: 'The competition surface may be different from your build surface. Bring shims and angle adjusters. Also: practice reloading items quickly — you may need to reset between attempts.'
+  }
+];
+
+const phasesEl = document.getElementById('phases');
+let totalSteps = 0;
+
+data.forEach((phase, pi) => {
+  totalSteps += phase.steps.length;
+  let html = `
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">${pi + 1}</div>
+        <div class="phase-title">${phase.title}</div>
+        <div class="phase-time">${phase.time}</div>
+      </div>`;
+
+  phase.steps.forEach((step, si) => {
+    const id = `s${pi}_${si}`;
+    html += `
+      <div class="step" data-id="${id}" onclick="toggle('${id}')">
+        <div class="checkbox">&#10003;</div>
+        <div class="step-body">
+          <div class="step-text">${step.text}</div>
+          <div class="step-meta">
+            <span class="time-est">${step.time}</span>
+            ${step.mat ? `<span class="materials">${step.mat}</span>` : ''}
+          </div>
+        </div>
+      </div>`;
+  });
+
+  if (phase.test) {
+    html += `
+      <div class="test-checkpoint">
+        <strong>Test Checkpoint:</strong> ${phase.test}
+      </div>`;
+  }
+
+  if (phase.tip) {
+    html += `
+      <div class="tip-box">
+        <strong>Tip:</strong> ${phase.tip}
+      </div>`;
+  }
+
+  html += '</div>';
+  phasesEl.innerHTML += html;
+});
+
+document.getElementById('totalSteps').textContent = totalSteps;
+
+const checked = new Set();
+try {
+  const saved = JSON.parse(localStorage.getItem('mp2026_checked') || '[]');
+  saved.forEach(id => checked.add(id));
+  checked.forEach(id => {
+    const el = document.querySelector(`[data-id="${id}"]`);
+    if (el) el.classList.add('checked');
+  });
+} catch(e) {}
+
+function toggle(id) {
+  const el = document.querySelector(`[data-id="${id}"]`);
+  if (checked.has(id)) {
+    checked.delete(id);
+    el.classList.remove('checked');
+  } else {
+    checked.add(id);
+    el.classList.add('checked');
+  }
+  localStorage.setItem('mp2026_checked', JSON.stringify([...checked]));
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = Math.round(checked.size / totalSteps * 100);
+  document.getElementById('progBar').style.width = pct + '%';
+  document.getElementById('progText').textContent = checked.size + ' / ' + totalSteps + ' done';
+}
+
+updateProgress();
+</script>
+</body>
+</html>
